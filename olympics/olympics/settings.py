@@ -71,7 +71,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'olympics.wsgi.application'
+WSGI_APPLICATION = 'olympics.wsgi.app'
 
 
 # Database
