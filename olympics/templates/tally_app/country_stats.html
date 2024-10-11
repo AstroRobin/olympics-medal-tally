@@ -1,0 +1,25 @@
+{% extends 'tally_app/base.html' %}
+
+{% block body_block %}
+
+<div class='jumbotron'>
+	<h1 style='font-size: 5rem'>{{ country.fullName }}</h1>
+	<img class='country-flag-medium' src="{{ country.flagURL }}" alt="{{ country.code }}">
+	<p>{{ country.code }}</p>
+	<h2>{{ season_filter }} Olympics Games</h2>
+	<h3>Medal Count (1896 - 2024)</h3><br>
+
+	<div class="btn-group-container">
+		<div class="btn-group" role="group" aria-label="Filter Games by Season">
+		    <a href="{% url 'tally_app:country_stats' code=country.code %}?season=All" class="btn btn-all">  All </a>
+		    <a href="{% url 'tally_app:country_stats' code=country.code %}?season=Summer" class="btn btn-summer">Summer</a>
+		    <a href="{% url 'tally_app:country_stats' code=country.code %}?season=Winter" class="btn btn-winter">Winter</a>
+		</div>
+	</div>
+	<div class="chart-container">
+		{{ chart|safe }}
+	</div>
+
+</div>
+
+{% endblock %}

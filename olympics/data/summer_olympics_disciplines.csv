@@ -1,0 +1,71 @@
+Sport,Discipline,Code
+Aquatics,Artistic Swimming,SWA
+Aquatics,Diving,DIV
+Aquatics,Marathon Swimming,OWS
+Aquatics,Swimming,SWM
+Aquatics,Water Polo,WPO
+Archery,,ARC
+Athletics,,ATH
+Badminton,,BDM
+Baseball and Softball,Baseball,BSB
+Baseball and Softball,Softball,SBL
+Basketball,3x3,BK3
+Basketball,Basketball,BKB
+Boxing,,BOX
+Canoe,Sprint,CSP
+Canoe,Slalom,CSL
+Cricket,,CKT
+Cycling,BMX Freestyle,BMF
+Cycling,BMX Racing,BMX
+Cycling,Mountain Bike,MTB
+Cycling,Road,CRD
+Cycling,Track,CTR
+Equestrian,Dressage,EDR
+Equestrian,Eventing,EVE
+Equestrian,Jumping,EJP
+Fencing,,FEN
+Hockey,,HOC
+Flag football,,AFB
+Football,,FBL
+Golf,,GLF
+Gymnastics,Artistic,GAR
+Gymnastics,Rhythmic,GRY
+Gymnastics,Trampoline,GTR
+Handball,,HBL
+Judo,,JUD
+Lacrosse,Sixes,LAX
+Modern Pentathlon,,MPN
+Rowing,Coastal,ROC
+Rowing,Rowing,ROW
+Rugby,Sevens,RU7
+Sailing,,SAL
+Shooting,,SHO
+Skateboarding,,SKB
+Sport Climbing,,CLB
+Squash,,SQU
+Surfing,,SRF
+Table Tennis,,TTE
+Taekwondo,,TKW
+Tennis,,TEN
+Triathlon,,TRI
+Volleyball,Beach,VBV
+Volleyball,Indoor,VVO
+Weightlifting,,WLF
+Wrestling,,WRE
+Wrestling,Greco-Roman,WRG
+Basque Pelota,,PEL
+Breaking,,BKG
+Croquet,,CQT
+Equestrian,Vaulting,EVL
+Equestrian,Driving,EDV
+Jeu de Paume,,JDP
+Karate,,KTE
+Lacrosse,Field,LAX
+Polo,,POL
+Rackets,,RQT
+Roque,,ROQ
+Rugby,Union,RUG
+Tug of War,,TOW
+Water Motorsports,,PBT
+Skating,Figure,FSK
+Ice Hockey,,IHO

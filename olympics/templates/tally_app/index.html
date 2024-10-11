@@ -1,0 +1,106 @@
+{% extends "tally_app/base.html" %}
+
+{% block title_block %}
+Home
+{% endblock %}
+
+{% block body_block %}
+<h1 style='margin-bottom: 5px;'>Summer & Winner Olympic Games</h1>
+<h2 style='font-size: 45px;'>(1896 - 2024)</h2>
+
+<br>
+<div class="btn-group-container">
+<div class="btn-group" role="group" aria-label="Filter Games by Season">
+    <a href="{% url 'games' %}?season=All" class="btn btn-all">  All </a>
+    <a href="{% url 'games' %}?season=Summer" class="btn btn-summer">Summer</a>
+    <a href="{% url 'games' %}?season=Winter" class="btn btn-winter">Winter</a>
+</div>
+</div>
+
+<div class="container mt-4 hosts-container">
+
+	<div id='host-cards' class="row">
+	    {% for host in hosts|slice:':16' %}
+	    <div class="col-md-3 col-sm-4 mb-3">
+	        <a href="{% url 'tally:host_tally' slug=host.slug %}" class="card">
+	            <div class="card-body text-center">
+	                <h3 class="host-title">{{ host.name }}</h3>
+	                <h5 class="host-season" style='margin-bottom:1px'>{{ host.season }} Olympics</h5>
+	                <p class="card-text" style="font-size: 12px;">{{ host.location }}, {{ host.year }}</p>
+	            	
+	            </div>
+	        </a>
+	    </div>
+	    {% endfor %}
+	</div>
+	<br>
+	<a href="{% url 'games' %}?season=All" class="btn btn-primary btn-more"> ... </a>
+
+</div>
+
+	<br><br><br>
+	<h2>All Olympic Games (1896 - 2024)</h2>
+	<h3>Overall Medal Tally</h3><br>
+	<table id='medal-table' class='table table-bordered table-striped table-dark table-hover'>
+		<thead style='background: #5c5c5c; font-size: 1.75rem; color:white' class='thead-dark'>
+			<th class='centered' scope='col'>#</th>
+			
+			<th colspan="2"><a href="?sort=country&direction={% if request.GET.sort == 'country' and request.GET.direction != 'desc' %}desc{% else %}asc{% endif %}">Country
+				{% if request.GET.sort == 'country' %}
+       				{% if request.GET.direction == 'desc' %} &#9660; {% else %} &#9650; {% endif %}
+		    	{% endif %}
+			</a></th>
+            <th class='centered' scope='col' style='width:10%'><a href="?sort=gold&direction={% if request.GET.sort == 'gold' and request.GET.direction != 'desc' %}desc{% else %}asc{% endif %}">Gold
+            	{% if request.GET.sort == 'gold' %}
+       				{% if request.GET.direction == 'desc' %} &#9660; {% else %} &#9650; {% endif %}
+		    	{% endif %}
+            </a></th>
+            <th class='centered' scope='col' style='width:10%'><a href="?sort=silver&direction={% if request.GET.sort == 'silver' and request.GET.direction != 'desc' %}desc{% else %}asc{% endif %}">Silver
+            	{% if request.GET.sort == 'silver' %}
+       				{% if request.GET.direction == 'desc' %} &#9660; {% else %} &#9650; {% endif %}
+		    	{% endif %}
+		    </a></th>
+            <th class='centered' scope='col' style='width:10%'><a href="?sort=bronze&direction={% if request.GET.sort == 'bronze' and request.GET.direction != 'desc' %}desc{% else %}asc{% endif %}">Bronze
+            	{% if request.GET.sort == 'bronze' %}
+       				{% if request.GET.direction == 'desc' %} &#9660; {% else %} &#9650; {% endif %}
+		    	{% endif %}
+		    </a></th>
+            <th class='centered' scope='col' style='width:10%'><a href="?sort=total&direction={% if request.GET.sort == 'total' and request.GET.direction != 'desc' %}desc{% else %}asc{% endif %}">Total
+            	{% if request.GET.sort == 'total' %}
+       				{% if request.GET.direction == 'desc' %} &#9660; {% else %} &#9650; {% endif %}
+		    	{% endif %}
+		    </a></th>
+		</thead>
+
+		{% for country in countries %}
+			{% if country.code != 'AIN' %}
+			<tr>
+				<td class='centered'>{{ forloop.counter }}</td>
+				<td style='width:30px; text-align:center; border-right:none;'>
+						<img class='country-flag-small' src="{{ country.flagURL }}" alt="{{ country.code }}">
+				</td>
+				<td style='border-left:none;'>
+					<a href="{% url 'tally:country' code=country.code %}">
+						<span id='country-name' class='country-name'>{{ country.fullName }}</span>
+					</a>
+				</td>
+				<td class='centered'>{{ country.num_gold_medals }}</td>
+				<td class='centered'>{{ country.num_silver_medals }}</td>
+				<td class='centered'>{{ country.num_bronze_medals }}</td>
+				<td class='centered'>{{ country.total_medals }}</td>
+			</tr>
+			{% endif %}
+		{% endfor %}
+
+	</table>
+
+	* Note, medal tally does not include medals for AIN
+
+{% endblock %}
+
+
+
+{% block ending_block %}
+{% load static %}
+
+{% endblock %}

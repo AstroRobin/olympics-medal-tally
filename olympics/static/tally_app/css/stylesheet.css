@@ -1,0 +1,361 @@
+.centered {
+  text-align: center;
+}
+
+.centered .th{
+  text-align: center;
+  color: white;
+}
+
+.table-medal{
+  width: 300px;
+  text-align: center;
+}
+
+.table-discipline{
+  background-color: #9C9C9C;
+}
+
+.container{
+  background-color: #9C9C9C !important;
+}
+
+
+.navbar-custom {
+  background-color: #c7d8e0 !important;
+}
+
+/* Change color of all navbar links */
+.navbar-nav .nav-link {
+    color: #000435;
+}
+
+/* Optional: Change the color on hover */
+.navbar-nav .nav-link:hover {
+    color: #000080;
+}
+
+
+#medal-table th a {
+  color: #ffffff;
+}
+
+#medal-table th:hover{
+  background-color: #333333;
+}
+
+#country-name{
+  color: #333333;
+}
+
+/* BUTTONS  */
+
+.btn-black {
+  background-color: black; /* Set button background color to black */
+  color: white; /* Set text and icon color to white */
+  border: none; /* Remove border */
+}
+
+.btn-black .bi {
+  color: white; /* Set icon color to white */
+}
+
+.btn-black:hover {
+  background-color: #333; /* Darker shade on hover (optional) */
+}
+
+.btn-group a {
+    width: 120px;
+    height: 50px;
+    text-align: center; /* Ensures the text inside the buttons is centered */
+}
+
+.btn-group-container {
+    display: flex;
+    justify-content: flex-start; /* Align the btn-group to the left */
+    margin-bottom: -15px;
+
+    position: relative; /* Ensure this is also positioned */
+    z-index: 5;
+}
+
+.btn-summer {
+    background-color: #FFA500; /* Orange for Summer */
+    color: white;
+    border: none;
+}
+
+.btn-winter {
+    background-color: #00BFFF; /* Light blue for Winter */
+    color: white;
+    border: none;
+}
+
+.btn-all {
+    background-color: #808080; /* Gray for All */
+    color: white;
+    border: none;
+}
+
+.btn-more {
+    width: 150px;
+    height: 45px;
+    border: none;
+    font-size: 25px;
+    vertical-align: bottom; /* Aligns text to the top */
+}
+
+
+/* Optional: Add hover effects */
+.btn-summer:hover {
+    background-color: #FF8C00; /* Darker Orange */
+}
+
+.btn-winter:hover {
+    background-color: #1E90FF; /* Darker Blue */
+}
+
+.btn-all:hover {
+    background-color: #696969; /* Darker Gray */
+}
+
+
+/* ACCORDIONS */
+.accordion-button {
+  width: 20%; /* Make button take full width of the column */
+  font-size: 15px;
+}
+
+.accordion-collapse {
+  width: 100%;
+  transition: all 0.5s ease; /* Optional: smooth transition */
+}
+
+/* Hide icons by default */
+.icon-up {
+  display: none; /* Hide up icon by default */
+}
+
+.icon-down {
+  display: inline; /* Hide up icon by default */
+}
+
+/* Show the appropriate icon based on the accordion state */
+.accordion-button:not(.collapsed) .icon-down {
+  display: none; /* Hide down icon when expanded */
+}
+
+.accordion-button:not(.collapsed) .icon-up {
+  display: inline; /* Show up icon when expanded */
+}
+
+.accordion-button.collapsed .icon-down {
+  display: inline; /* Show down icon when collapsed */
+}
+
+.justify-right {
+  display: flex;
+  justify-content: flex-end; /* Align the button to the right */
+}
+
+/* Change the link color inside the card */
+.card {
+    text-decoration: none; /* Remove underline from the card itself */
+    color: inherit; /* Inherit the text color from the parent element */
+    transition: background-color 0.3s; /* Optional: smooth background color change */
+}
+
+/* Override the color of text inside the card */
+.card-body {
+    color: #000; /* Set the default text color (black or any color you prefer) */
+}
+
+/* Change color on hover */
+.card:hover {
+    background-color: #f8f9fa; /* Light background color on hover */
+}
+
+
+/* Ensure headings and paragraphs inside the card have the same color as set above */
+.card h3, .card h5, .card p {
+    color: inherit; /* Ensure these elements inherit the color set on .card-body */
+}
+
+.card-text {
+  font-size: 100px;
+}
+
+
+/* HOSTS  */
+#current-host-name {
+  font-size: 7rem;
+  margin-bottom: -15px; /* Adjust this value as needed */
+}
+
+.hosts-container {
+  background-color: #c7d8e0 !important;
+  border-radius: 15px; /* Rounded corners */
+  padding: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add a shadow for more effect */
+  position: relative;
+  z-index: 10;
+}
+
+
+/* COUNTRY ITEMS */
+
+.country-item {
+  border: 2px solid #cccccc;
+  padding: 10px;
+  margin: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 65px;
+}
+
+.flag-name {
+  display: flex;
+  align-items: center;
+}
+
+.country-flag {
+  height: 40px;
+  width: auto;
+  margin-left: 10px;
+}
+
+.country-flag-small {
+  height: 15px;
+  width: auto;
+  object-fit: contain;  /* Ensures flags are fully visible within the given height */
+}
+
+.country-flag-medium {
+  height: 25px;
+  width: auto;
+  object-fit: contain;  /* Ensures flags are fully visible within the given height */
+}
+
+.country-name {
+  text-align: right;
+  margin-left: auto; /* Push the name to the right */
+  margin-right: 10px; /* Adjust distance from the right edge */
+}
+
+.country-name-small {
+  flex-grow: 1;  /* Allow country name to take up remaining space */
+}
+
+.stats-button-container {
+  position: relative; /* Establishes a positioning context */
+  width: 15%; /* Full width */
+  height: 30px; /* Set height */
+  left: 10px;
+  background-color: transparent !important; /* Optional background */
+}
+
+.stats-button {
+    position: absolute; /* Positioning relative to the nearest positioned ancestor */
+    top: 10px; /* Distance from the top */
+    left: 10px; /* Distance from the left */
+    z-index: 10; /* Ensure it appears above other content */
+}
+
+.item .icon-wrap {
+  font-size: 20px;
+  line-height: 20px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 2;
+  background: #fff;
+  padding: 1px;
+  border-radius: 4px;
+}
+
+/* EVENT MEDALLIST */
+.medal-podium {
+  background-color: transparent !important; /* Set the background to transparent */
+  padding: 2rem 1rem; /* Adjust padding if necessary */
+  border-radius: 10px; /* Optional: Add rounded corners */
+  /* Optional: Add some text styles for visibility */
+  color: #333; /* Change text color if needed */
+}
+
+
+.gold-medal{
+  height: 250px;
+}
+
+.silver-medal{
+  height: 250px;
+}
+
+.bronze-medal{
+  height: 250px;
+}
+
+.gold-medal .winner-name{
+  font-size: 3.25rem;
+}
+
+.silver-medal .winner-name{
+  font-size: 2.75rem;
+}
+
+.bronze-medal .winner-name{
+  font-size: 2.75rem;
+}
+
+.gold-medal .winner-country{
+  font-size: 2rem;
+}
+
+.silver-medal .winner-country{
+  font-size: 2rem;
+}
+
+.bronze-medal .winner-country{
+  font-size: 2rem;
+}
+
+.gold-medal-icon{
+  color: #e8c62c;
+  font-size: 8rem;
+}
+
+.silver-medal-icon{
+  color: silver;
+  font-size: 6rem;
+}
+
+.bronze-medal-icon{
+  color: #e6a14e;
+  font-size: 5rem;
+}
+
+
+.d-flex {
+  display: flex;
+}
+
+.align-items-center {
+  align-items: center; /* Vertically center */
+}
+
+.justify-content-center {
+  justify-content: center; /* Horizontally center */
+}
+
+.medal-info {
+  text-align: center; /* Ensures text and images are centered */
+}
+
+
+
+/* CHARTS */
+.chart-container {
+    position: relative; /* Ensure this is also positioned */
+    z-index: 10;
+}

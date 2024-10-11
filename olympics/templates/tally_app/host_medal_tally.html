@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+{% extends 'tally_app/base.html' %}
+
+{% block title_block %}
+{{ host.name }}
+{% endblock %}
+
+{% block body_block %}
+
+<div class='container mt-4' style="background-color: transparent !important;">
+	<div class="row"> <!-- This makes the accordion justified to the left -->
+		<div class="col-md-12"> <!-- Adjust column width as necessary -->
+			<div class="accordion" id="hostAccordion">
+			  <div class="accordion-item">
+			    <h2 class="accordion-header">
+			    	<div class='justify-right'>
+			      		<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+			        	{{ current_host.name }}
+			        	<i class="bi bi-chevron-down icon-down"></i>
+                        <i class="bi bi-chevron-up icon icon-up"></i>
+			      		</button>
+			        </div>
+			    </h2>
+			    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#hostAccordion">
+			      <div class="accordion-body">
+			        <div class="row">
+			            {% for host in hosts %}
+			            <div class="col-md-3 col-sm-4 mb-3">
+			                <a href="{% url 'tally:host_tally' host.slug %}" class="card">
+			                    <div class="card-body text-center">
+			                    	{# <a href={% url 'tally_app:hosts' slug=host.slug %}> #}
+			                        <h3 class="host-title">{{ host.name }}</h3>
+			                        <h5 class="host-season">{{ host.season }} Olympics</h5>
+			                        <p class="card-text" style="font-size: 12px;">{{ host.location }} {{ host.year }}</p>
+			                    	{# </a> #}
+			                    </div>
+			                </a>
+			            </div>
+			            {% endfor %}
+			        </div>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<h1 id="current-host-name"> {{ current_host.name }} </h1>
+<h2 id="current-host-season"> {{ current_host.season }} Olympics</h2>
+<br>
+
+<h3 style='font-size: 3.5rem'>Overall Medal Tally</h2><br>
+	<table id='medal-table' class='table table-bordered table-striped table-dark table-hover'>
+		<thead style='background: #5c5c5c; font-size: 1.75rem; color:white' class='thead-dark'>
+			<th class='centered' scope='col'>#</th>
+			
+			<th colspan="2"><a href="?sort=country&direction={% if request.GET.sort == 'country' and request.GET.direction != 'desc' %}desc{% else %}asc{% endif %}">Country
+				{% if request.GET.sort == 'country' %}
+       				{% if request.GET.direction == 'desc' %} &#9660; {% else %} &#9650; {% endif %}
+		    	{% endif %}
+			</a></th>
+            <th class='centered' scope='col' style='width:10%'><a href="?sort=gold&direction={% if request.GET.sort == 'gold' and request.GET.direction != 'desc' %}desc{% else %}asc{% endif %}">Gold
+            	{% if request.GET.sort == 'gold' %}
+       				{% if request.GET.direction == 'desc' %} &#9660; {% else %} &#9650; {% endif %}
+		    	{% endif %}
+            </a></th>
+            <th class='centered' scope='col' style='width:10%'><a href="?sort=silver&direction={% if request.GET.sort == 'silver' and request.GET.direction != 'desc' %}desc{% else %}asc{% endif %}">Silver
+            	{% if request.GET.sort == 'silver' %}
+       				{% if request.GET.direction == 'desc' %} &#9660; {% else %} &#9650; {% endif %}
+		    	{% endif %}
+		    </a></th>
+            <th class='centered' scope='col' style='width:10%'><a href="?sort=bronze&direction={% if request.GET.sort == 'bronze' and request.GET.direction != 'desc' %}desc{% else %}asc{% endif %}">Bronze
+            	{% if request.GET.sort == 'bronze' %}
+       				{% if request.GET.direction == 'desc' %} &#9660; {% else %} &#9650; {% endif %}
+		    	{% endif %}
+		    </a></th>
+            <th class='centered' scope='col' style='width:10%'><a href="?sort=total&direction={% if request.GET.sort == 'total' and request.GET.direction != 'desc' %}desc{% else %}asc{% endif %}">Total
+            	{% if request.GET.sort == 'total' %}
+       				{% if request.GET.direction == 'desc' %} &#9660; {% else %} &#9650; {% endif %}
+		    	{% endif %}
+		    </a></th>
+		</thead>
+
+		{% for country in countries %}
+			{% if country.code != 'AIN' %}
+			<tr>
+				<td class='centered'>{{ forloop.counter }}</td>
+				<td style='width:30px; text-align:center; border-right:none;'>
+						<img class='country-flag-small' src="{{ country.flagURL }}" alt="{{ country.code }}">
+				</td>
+				<td style='border-left:none;'>
+					<a href="{% url 'tally:country_tally_for_host' country.code current_host.slug %}">
+						<span id='country-name' class='country-name'>{{ country.fullName }}</span>
+					</a>
+				</td>
+				<td class='centered'>{{ country.num_gold_medals }}</td>
+				<td class='centered'>{{ country.num_silver_medals }}</td>
+				<td class='centered'>{{ country.num_bronze_medals }}</td>
+				<td class='centered'>{{ country.total_medals }}</td>
+			</tr>
+			{% endif %}
+		{% endfor %}
+
+	</table>
+
+	* Note, medal tally does not include medals for AIN
+
+{% endblock %}

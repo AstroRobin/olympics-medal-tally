@@ -1,0 +1,80 @@
+{% extends 'tally_app/base.html' %}
+
+{% block body_block %}
+
+<br>
+<div class='jumbotron'>
+	<h1 class="event-title">{{ event.discipline }}</h1>
+	<h2 class="event-name">{{ event.name }}</h2>
+	<h3 class="host-name">{{ event.host.name }}</h3>
+	<br>
+	<div class="container medal-podium">
+		<div class='row'>
+			<div class="col-md-4 d-flex align-items-center justify-content-center silver-medal">
+	        	<i class="bi bi-2-circle-fill silver-medal-icon"></i>
+	        </div>
+	        <div class="col-md-4 d-flex align-items-center justify-content-center gold-medal">
+	        	<i class="bi bi-1-circle-fill gold-medal-icon"></i>
+	        </div>
+	        <div class="col-md-4 d-flex align-items-center justify-content-center bronze-medal">
+	        	<i class="bi bi-3-circle-fill bronze-medal-icon"></i>
+	        </div>
+	    </div>
+	    <div class='row align-items-center'>  
+			<!-- Silver Medal -->
+			<div class="col-md-4 justify-content-center silver-medal">
+		    	{% if silver_medal %}
+			    <div class="col-auto winner-name">
+			    	<span>{{ silver_medal.content_object }}</span>
+			    </div>
+			    <div class="col-auto ml-4 winner-country">
+			        <img src="{{ silver_medal.content_object.country.flagURL }}" alt="{{ silver_medal.content_object.country.code }} flag" class="flag-icon" style="height: 20px;">
+			        <span>{{ silver_medal.content_object.country.code }}</span>
+			    </div>
+		    	{% else %}
+		        <p>No Medal data available.</p>
+		    	{% endif %}
+			</div>
+
+		    <!-- Gold Medal -->
+		    <div class="col-md-4 align-items-center justify-content-center gold-medal">
+		    	{% if gold_medal %}
+			    <div class="col-auto winner-name">
+			        <span>{{ gold_medal.content_object }}</span>
+			    </div>
+			    <div class="col-auto ml-4 winner-country">
+			        <img src="{{ gold_medal.content_object.country.flagURL }}" alt="{{ gold_medal.content_object.country.code }} flag" class="flag-icon" style="height: 20px;">
+			        <span>{{ gold_medal.content_object.country.code }}</span>
+			    </div>
+		    	{% else %}
+		        <p>No Medal data available.</p>
+		    	{% endif %}
+		    </div>
+
+
+		   	<!-- Bronze Medal -->
+
+		   	<div class="col-md-4 bronze-medal">
+		    	{% if bronze_medal %}
+			    <div class="col-auto winner-name">
+			        <span>{{ bronze_medal.content_object }}</span>
+			    </div>
+			    <div class="col-auto ml-4 winner-country">
+			        <img src="{{ bronze_medal.content_object.country.flagURL }}" alt="{{ bronze_medal.content_object.country.code }} flag" class="flag-icon" style="height: 20px;">
+			        <span>{{ bronze_medal.content_object.country.code }}</span>
+			    </div>
+		    	{% else %}
+		        <p>No Medal data available.</p>
+		    	{% endif %}
+		     </div>
+	    
+	    </div>
+
+	</div>
+
+</div>
+
+
+</div>
+
+{% endblock %}

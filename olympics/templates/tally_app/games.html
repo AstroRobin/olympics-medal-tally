@@ -1,0 +1,40 @@
+{% extends 'tally_app/base.html' %}
+
+{% block title_block %}
+Games
+{% endblock %}
+
+{% block body_block %}
+
+<h1 style='margin-bottom: 5px;'>Summer & Winner Olympic Games</h1>
+<h2 style='font-size: 45px;'>(1896 - 2024)</h2>
+
+<br>
+<div class="btn-group-container">
+<div class="btn-group" role="group" aria-label="Filter Games by Season">
+    <a href="{% url 'games' %}?season=All" class="btn btn-all">  All </a>
+    <a href="{% url 'games' %}?season=Summer" class="btn btn-summer">Summer</a>
+    <a href="{% url 'games' %}?season=Winter" class="btn btn-winter">Winter</a>
+</div>
+</div>
+
+<div class="container mt-4 hosts-container">
+
+	<div id='host-cards' class="row">
+	    {% for host in hosts %}
+	    <div class="col-md-3 col-sm-4 mb-3">
+	        <a href="{% url 'tally:host_tally' slug=host.slug %}" class="card">
+	            <div class="card-body text-center">
+	                <h3 class="host-title">{{ host.name }}</h3>
+	                <h5 class="host-season" style='margin-bottom:1px'>{{ host.season }} Olympics</h5>
+	                <p class="card-text" style="font-size: 12px;">{{ host.location }}, {{ host.year }}</p>
+	            	
+	            </div>
+	        </a>
+	    </div>
+	    {% endfor %}
+	</div>
+
+</div>
+
+{% endblock %}

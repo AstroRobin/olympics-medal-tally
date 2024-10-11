@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+{% extends "tally_app/base.html" %}
+
+{% block title_block %}
+{{ country.name }} Medals
+{% endblock %}
+
+{% block body_block %}
+
+<div class='container' style='text-align: right; padding: 10px; background-color: transparent !important;'>
+	<a href="{% url 'tally_app:country_stats' code=country.code %}" class="btn custom-btn" style='width: 20%; height: 35px; background-color: transparent; border: 0.9px black solid; font-size: 1.5rem'> Graph of Yearly Medals</a>
+</div>
+
+<div class='container mt-2' style="background-color: transparent !important;">
+	<div class="row"> <!-- This makes the accordion justified to the left -->
+		<div class="col-md-12"> <!-- Adjust column width as necessary -->
+			<div class="accordion" id="hostAccordion">
+			  <div class="accordion-item">
+			    <h2 class="accordion-header">
+			    	<div class='justify-right'>
+			      		<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="font-size: 1.75rem;">
+			        	Select Olympic Games
+			        	<i class="bi bi-chevron-down icon-down"></i>
+                        <i class="bi bi-chevron-up icon icon-up"></i>
+			      		</button>
+			        </div>
+			    </h2>
+			    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#hostAccordion">
+			      <div class="accordion-body">
+			        <div class="row">
+			            {% for host in hosts %}
+			            <div class="col-md-3 col-sm-4 mb-3">
+			                <a href="{% url 'tally:country_tally_for_host' country.code host.slug %}" class="card">
+			                    <div class="card-body text-center">
+			                    	{# <a href={% url 'tally_app:hosts' slug=host.slug %}> #}
+			                        <h3 class="host-title">{{ host.name }}</h3>
+			                        <h5 class="host-season">{{ host.season }} Olympics</h5>
+			                        <p class="card-text" style="font-size: 12px;">{{ host.location }} {{ host.year }}</p>
+			                    	{# </a> #}
+			                    </div>
+			                </a>
+			            </div>
+			            {% endfor %}
+			        </div>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+	<h2 style='font-size: 4rem'>{{ country.fullName }}</h2>
+	<img class='country-flag-medium' src="{{ country.flagURL }}" alt="{{ country.code }}">
+	<p>{{ country.code }}</p>
+
+	<h2>All Olympic Games (1896 - 2024)</h2>
+	<h3>Overall Medal Tally</h3><br>
+	<table class='table table-bordered'>
+		<thead style='background: #5c5c5c; font-size: 1.75rem'>
+			<th scope='col' style='width: 300px; color:white'>Medal Events</th>
+			<th scope='col' style='text-align:center; width:75px; color:gold'>Gold</th>
+			<th scope='col' style='text-align:center; width:75px; color:silver'>Silver</th>
+			<th scope='col' style='text-align:center; width: 5px; color:orange'>Bronze</th>
+			<th scope='col' style='text-align:center; width: 5px; color:white'>Host</th>
+		</thead>
+		{% for discipline, medals in medalsPerDiscipline.items %}
+			<tr scope='row' class='table-discipline'>
+				<td style='background:#c9c9c9' colspan=5> <b>{{ discipline }}</b> </td>
+			<tr>
+			{% for medal in medals|dictsortreversed:"date" %}
+				<tr>
+					<td> <a href="{% url 'tally:event_detail' medal.event.id %}">&nbsp&nbsp{{ medal.event.gender }}'s {{ medal.event.name }}</a> </td>
+					{% if medal.rank == 'Gold' %}
+					<td style='text-align:center;'>
+						<i style="color:#e8c62c" class="bi bi-1-circle-fill"></i>
+					</td>
+					<td></td>
+					<td></td>
+					{% elif medal.rank == 'Silver' %}
+					<td></td>
+					<td style='text-align:center;'>
+						<i style="color:silver" class="bi bi-2-circle-fill"></i>
+					</td>
+					<td></td>
+					{% elif medal.rank == 'Bronze' %}
+					<td></td>
+					<td></td>
+					<td style='text-align:center;'>
+						<i style="color:#e6a14e" class="bi bi-3-circle-fill"></i>
+					</td>
+					{% else %}
+					<td></td>
+					<td></td>
+					<td></td>
+					{% endif %}
+					<td style='text-align:center;'>{{ medal.event.host }}</td>
+				</tr>
+			{% endfor %}
+		{% endfor %}
+		<br>
+	</table>
+	{% endblock %}

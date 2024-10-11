@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% extends "tally_app/base.html" %}
+
+{% block title_block %}
+Countries
+{% endblock %}
+
+{% block body_block %}
+	<h2 style='font-size: 4rem'>All Countries</h2>
+	<br>
+	<div class='row'>
+		{% for country in countries %}
+			<div class="col-md-{{ num_columns_md }} col-sm-{{ num_columns_sm }} col-{{ num_columns_xs }}">
+				<a href="{% url 'tally:country' code=country.code %}">
+					<div class='country-item'>
+						<img class='country-flag' src="{{ country.flagURL }}" alt="{{ country.fullName }} flag">
+						<span class='country-name'>{{ country.fullName }}</span>
+					</div>
+				</a>
+			</div>
+			{% if forloop.counter|divisibleby:num_columns and not forloop.last %}
+        		</div><div class="row">
+    		{% endif %}
+
+		{% endfor %}
+	</div>
+
+{% endblock %}

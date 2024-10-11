@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+{% extends 'tally_app/base.html' %}
+
+{% block body_block %}
+
+<div class='container mt-4' style="background-color: transparent !important;">
+	<div class="row"> <!-- This makes the accordion justified to the left -->
+		<div class="col-md-12"> <!-- Adjust column width as necessary -->
+			<div class="accordion" id="hostAccordion">
+			  <div class="accordion-item">
+			    <h2 class="accordion-header">
+			    	<div class='justify-right'>
+			      		<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+			        	{{ current_host.name }}
+			        	<i class="bi bi-chevron-down icon-down"></i>
+                        <i class="bi bi-chevron-up icon icon-up"></i>
+			      		</button>
+			        </div>
+			    </h2>
+			    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#hostAccordion">
+			      <div class="accordion-body">
+			        <div class="row">
+			            {% for host in hosts %}
+			            <div class="col-md-3 col-sm-4 mb-3">
+			                <a href="{% url 'tally:country_tally_for_host' code=country.code slug=host.slug %}" class="card">
+			                    <div class="card-body text-center">
+			                        <h3 class="host-title">{{ host.name }}</h3>
+			                        <h5 class="host-season">{{ host.season }} Olympics</h5>
+			                        <p class="card-text" style="font-size: 12px;">{{ host.location }} {{ host.year }}</p>
+			                    	
+			                    </div>
+			                </a>
+			            </div>
+			            {% endfor %}
+			        </div>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<h1 id="current-host-name"> {{ current_host.name }} </h1>
+<h2 id="current-host-season"> {{ current_host.season }} Olympics</h2>
+<br>
+
+
+<h2 style='font-size: 4rem'>{{ country.fullName }}</h2>
+<img class='country-flag-medium' src="{{ country.flagURL }}" alt="{{ country.code }}">
+<p>{{ country.code }}</p>
+<h3 style='font-size: 3.5rem'>Overall Medal Tally</h2><br>
+
+<table class='table table-bordered'>
+	<thead style='background: #5c5c5c; font-size: 1.75rem'>
+		<th scope='col' style='width: 300px; color:white'>Medal Events</th>
+		<th scope='col' style='text-align:center; width:75px; color:gold'>Gold</th>
+		<th scope='col' style='text-align:center; width:75px; color:silver'>Silver</th>
+		<th scope='col' style='text-align:center; width: 5px; color:orange'>Bronze</th>
+	</thead>
+	{% for discipline, medals in medalsPerDiscipline.items %}
+		<tr scope='row' class='table-discipline'>
+			<td style='background:#c9c9c9' colspan=4> <b>{{ discipline }}</b> </td>
+		<tr>
+		{% for medal in medals %}
+			<tr>
+				<td> &nbsp&nbsp{{ medal.event.gender }}'s {{ medal.event.name }}</td>
+				{% if medal.rank == 'Gold' %}
+				<td style='text-align:center;'>
+					<i style="color:#e8c62c" class="bi bi-1-circle-fill"></i>
+				</td>
+				<td></td>
+				<td></td>
+				{% elif medal.rank == 'Silver' %}
+				<td></td>
+				<td style='text-align:center;'>
+					<i style="color:silver" class="bi bi-1-circle-fill"></i>
+				</td>
+				<td></td>
+				{% elif medal.rank == 'Bronze' %}
+				<td></td>
+				<td></td>
+				<td style='text-align:center;'>
+					<i style="color:#e6a14e" class="bi bi-1-circle-fill"></i>
+				</td>
+				{% else %}
+				<td></td>
+				<td></td>
+				<td></td>
+				{% endif %}
+			</tr>
+		{% endfor %}
+	{% endfor %}
+	<br>
+</table>
+{% endblock %}
