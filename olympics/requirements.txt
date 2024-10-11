@@ -1,0 +1,6 @@
+django==5.1.1
+django-bootstrap3==24.3
+django-braces==1.15.0
+django-extensions==3.2.3
+pandas==2.2.3
+plotly==5.24.1
