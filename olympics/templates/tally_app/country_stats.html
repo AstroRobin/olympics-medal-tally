@@ -16,9 +16,27 @@
 		    <a href="{% url 'tally_app:country_stats' code=country.code %}?season=Winter" class="btn btn-winter">Winter</a>
 		</div>
 	</div>
-	<div class="chart-container">
-		{{ chart|safe }}
-	</div>
+	<br><br>
+	<table class="table">
+	    <thead>
+	        <tr>
+                <th>Year</th>
+                <th>#Gold</th>
+                <th>#Silver</th>
+                <th>#Bronze</th>
+                <th>#Total</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	        {% for row in medal_data %}
+            <tr>
+                {% for value in row %}
+                    <td>{{ value }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+	    </tbody>
+	</table>
 
 </div>
 
